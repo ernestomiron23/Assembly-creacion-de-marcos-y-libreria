@@ -1,0 +1,599 @@
+INCLUDE retardo.lib
+.model tiny ; 	        directiva de modelo de programación
+.stack ; 		directiva de asignación de segmento de stack
+.data ; 		directiva de asignación de segmento de datos
+
+TXT	DB	"TECNOLOGICO DE ESTUDIOS SUPERIORES DEL ORIENTE DEL ESTADO DE MEXICO $"
+TXT1	DB	"INGENIERIA EN SISTEMAS COMPUTACIONALES $"
+TXT2	DB	"LENGUAJE DE INTERFAZ $"
+TXT3	DB	"NAVA HERNANDEZ GERARDO $"
+TXT4	DB	"ERNESTO MIRON SEPULVEDA $"
+TXT5	DB	"6S11 $"	
+
+TXT6	DB	"1- Valores ascii $"
+TXT7	DB	"2- Creamos $"
+TXT8	DB	"3- Guardamos $"
+TXT9	DB	"4- Borramos$"
+TXT10	DB	"5- salir $"
+
+titu    DB     "ASCII  HEXADE $"
+
+num      DB      "1000   03E8$"
+num1     DB      "1200   04B0$"
+num2     DB      "1400   0578$"
+num3     DB      "1600   0640$"
+num4     DB      "1800   0708$"
+num5     DB      "2000   07D0$"
+num6     DB      "2200   0898$"
+num7     DB      "2400   0960$"
+num8     DB      "2600   0A28$"
+num9     DB      "2800   0AF0$"
+
+titu1      DB   "ASCII  HEXADE $"
+
+le1      DB      "@      40$"
+le2      DB      "/      2f$"
+le3      DB      "%      25$"
+le4      DB      "#      23$"
+le5      DB      "?      3f$"
+le6      DB      "¡      a1$"
+le7      DB      "¿      bf$"
+le8      DB      "(      28$"
+le9      DB      "-      2d$"
+le10     DB      ";      3b$"
+
+.code ;		 directiva de asignación de segmento de datos
+start:
+
+begin	PROC	FAR       ; inicio de PROCEDIMIENTO BEGIN
+        CALL marco
+;----------------------------------------------------------------------------
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,3	;RENGLON 
+	MOV	DL,10	;COLUMNA 
+	INT	10H
+	
+	LEA	DX,TXT	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;----------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,3	;RENGLON 
+	MOV	DL,10	;COLUMNA 
+	INT	10H
+	
+	LEA	DX,TXT	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;----------------------------------------------------------------------------
+
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,6	;RENGLON 
+	MOV	DL,25	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT1	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT1 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;-----------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,9	;RENGLON 
+	MOV	DL,25	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT2	        ;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT2 	; segmento en AX
+	MOV 	DS,AX		; DS:DX apunta al mensaje
+	MOV	AH,09H	        ;PETICION DE DESPLIEGE
+	INT	21H	        ;INTERRUPCION
+;----------------------------------------------------------------------------
+        MOV	AX,0600H	; PETICION
+	MOV 	BH,35H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0B19H	;INICIO en el y:11 y luego en el x:25
+	MOV	DX,1437H	;FINAL  y:20 y luego en el x:60
+	INT	10H
+;----------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,12	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT3	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT3 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+;----------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,15	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT4	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT4 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------------------------------------------------------------------
+
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,18	;RENGLON 
+	MOV	DL,36	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT5	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT5 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------------------------------------------------------------------
+        CALL	PAUSA
+        MOV    AX, 4C00H ; vuelta al DOS
+        INT    10H
+retardo
+        CALL    marco1
+;----------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,03	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT6	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT6 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+;----------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,06	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT7	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT7 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,09	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT8	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT8 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,12	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT9	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT9 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------------------------------------------------------------------
+	MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,15	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,TXT10	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG TXT10 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------------------------------------------------------------------
+        CALL	PAUSA
+        MOV    AX, 4C00H ; vuelta al DOS
+        INT    10H
+retardo
+        CALL    marco2
+;----------------------------------------------------------------------------
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,01	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+	
+	LEA	DX,titu	        ;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG titu 	;segmento en AX
+	MOV 	DS,AX		;DS:DX apunta al mensaje
+	MOV	AH,09H	        ;PETICION DE DESPLIEGE
+	INT	21H	        ;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,03	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num	        ;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num 	; segmento en AX
+	MOV 	DS,AX	        ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,05	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num1	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num1 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,07	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num2	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num2 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,09	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num3	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num3 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,11	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num4	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num4 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,13	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num5	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num5 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,15	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num6	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num6 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,17	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num7	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num7 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,19	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num8	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num8 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,21	;RENGLON 
+	MOV	DL,05	;COLUMNA 
+	INT	10H
+
+	LEA	DX,num9	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG num9 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+        
+;-----------------------------------------------------------ascii
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,01	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+	
+	LEA	DX,titu1	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG titu1 	;segmento en AX
+	MOV 	DS,AX		;DS:DX apunta al mensaje
+	MOV	AH,09H	        ;PETICION DE DESPLIEGE
+	INT	21H	        ;INTERRUPCION
+
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,03	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le1	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le1 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,05	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le2	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le2 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,07	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le3	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le3 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,09	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le4	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le4 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;----
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,11	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le5	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le5 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;----
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,13	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le6	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le6 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;-----------
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,15	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le7	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le7 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;-----------
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,17	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le8	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le8 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;_------------------
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,19	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le9	         ;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le9 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;-------------------
+        MOV 	AH,02H	;PETICION PARA COLOCAR EL CURSOR
+	MOV	BH,00	;NUMERO DE PAGINA 0
+	MOV	DH,21	;RENGLON 
+	MOV	DL,28	;COLUMNA 
+	INT	10H
+
+	LEA	DX,le10	;CARGA DE LA DIRRECCION
+	MOV 	AX,SEG le10 	; segmento en AX
+	MOV 	DS,AX		 ; DS:DX apunta al mensaje
+	MOV	AH,09H	;PETICION DE DESPLIEGE
+	INT	21H	;INTERRUPCION
+;---------------
+
+        CALL	PAUSA
+        MOV    AX, 4C00H ; vuelta al DOS
+        INT    21H
+
+PAUSA	PROC	NEAR
+	MOV  AH, 10h ; PAUSA
+	INT  16h
+	RET
+PAUSA	ENDP
+
+marco PROC NEAR
+;--pantalla completa color-----------------------
+	MOV	AX,0600H	;PETICION
+	MOV 	BH,34H	        ;ATRIBUTO negro SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,184FH	;FINAL
+	INT	10H
+;arriba------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,54H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,004FH	;FINAL
+	INT	10H
+;izquierda---------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,54H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,1800H	;FINAL
+	INT	10H
+;abajo-----------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,54H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,1800H	;INICIO
+	MOV	DX,184FH	;FINAL
+	INT	10H
+;derecha--------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,54H	;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,004FH	;INICIO
+	MOV	DX,184FH		;FINAL
+	INT	10H
+
+        RET 
+        marco endp
+
+marco1 PROC NEAR
+;--pantalla completa color-----------------------
+	MOV	AX,0600H	;PETICION
+	MOV 	BH,24H	        ;ATRIBUTO negro SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,184FH	;FINAL
+	INT	10H
+;arriba------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,14H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,004FH	;FINAL
+	INT	10H
+;izquierda---------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,14H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,1800H	;FINAL
+	INT	10H
+;abajo-----------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,14H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,1800H	;INICIO
+	MOV	DX,184FH	;FINAL
+	INT	10H
+;derecha--------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,14H	;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,004FH	;INICIO
+	MOV	DX,184FH		;FINAL
+	INT	10H
+
+        RET 
+        marco1 endp
+
+marco2 PROC NEAR
+;--pantalla completa color-----------------------
+	MOV	AX,0600H	;PETICION
+	MOV 	BH,36H	        ;ATRIBUTO negro SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,184FH	;FINAL
+	INT	10H
+;arriba------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,46H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,004FH	;FINAL
+	INT	10H
+;izquierda---------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,46H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,0000H	;INICIO
+	MOV	DX,1800H	;FINAL
+	INT	10H
+;abajo-----------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,46H	        ;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,1800H	;INICIO
+	MOV	DX,184FH	;FINAL
+	INT	10H
+;derecha--------------------------------------------
+	MOV	AX,0600H	; PETICION
+	MOV 	BH,46H	;ATRIBUTO NEGRO SOBRE BLANCO
+	MOV	CX,004FH	;INICIO
+	MOV	DX,184FH		;FINAL
+	INT	10H
+
+        RET 
+        marco2 endp
+
+BEGIN	ENDP	;FIN DE PROCEDIMIENTO
+	END	start	;FIN DE PROGRAMA
